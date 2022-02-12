@@ -86,7 +86,7 @@ header span {
   .dropdown-content a {
     float: none;
     color: black;
-    /* padding: 12px 16px; */
+    padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
@@ -164,8 +164,8 @@ footer {
 .side_article {
     width: 25%;
     float: right;
-    /* height: 1100px; */
-    /* border-left: 1px dotted #6d6d6d; */
+    height: 600px;
+    border-left: 1px dotted #6d6d6d;
 }
 
 .Description {

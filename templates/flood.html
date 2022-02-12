@@ -4,6 +4,15 @@
 <head>
     <title>Natural Disaster</title>
     <link href="/static/index.css" rel="stylesheet" type="text/css" media="only screen" />
+    <script type = "text/javascript">
+        function goToNewPage()
+        {
+            var url = document.getElementById('list').value;
+            if (url != 'none'){
+                window.location = url;
+            }
+        }
+    </script>
 </head>
 <body>
         
@@ -21,7 +30,7 @@
             <a href="/templates/landslides.html">Landslides</a>
           </div>
         </div>
-        <a href="#Predict">Predict</a>
+        <a href="/templates/predict.html">Predict</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
     </div>
     <div class="Container">

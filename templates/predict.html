@@ -51,7 +51,7 @@
 
                         <h2>Click the button to get the coordinates of your current loaction.</h2>
 
-                        <button onclick="getLocation()" class = "button">Click Here</button>
+                        <button onclick="getLocation()" class="button">Click Here</button>
 
                         <p id="demo"></p>
 
@@ -67,7 +67,7 @@
                             }
 
                             function showPosition(position) {
-/                                document.getElementById("latBox").value = position.coords.latitude;
+                                document.getElementById("latBox").value = position.coords.latitude;
                                 document.getElementById("longBox").value = position.coords.longitude;
 
                                 x.innerHTML = "Latitude: " + position.coords.latitude +
@@ -81,13 +81,26 @@
                             }
 
                         </script>
+                        <h2>To find some other location follow the instructions</h2>
+                        <ol>
+                            <li>Click on the button below</li>
+                            <li>Find the location</li>
+                            <li>Left click on that location</li>
+                            <li>Now right Click on the location</li>
+                            <li>Copy the coordinates</li>
+                        </ol>
+                        <form action="https://www.google.com/maps/">
+                            <input type="submit" value="Google Map" class="button" />
+                        </form>
                         <!-- <img src="/static/Images/pexels-wilson-malone-4558211.jpg" alt="Broken Road" width="100%" height="500vm"> -->
                         <br>
                         <h2>Enter the latitude and longitude of the location where you want to predict earthquake.</h2>
-                        <form action="/pred" method="POST", id="predictionForm">
-                            <p>Latitude: <input style= height:30px; font-size:22pt; type="text" name="latitude" placeholder="Enter Latitude" size="30m" id="latBox", value= "{{curLat}}"></p>
-                            <p>Longitude: <input style= height:30px; font-size:22pt; type="text" name="longitude" placeholder="Enter Longitude" size = "30vm" id="longBox", value="{{curLong}}"></p>
-                            <input type="submit" value="Submit" class = "button">
+                        <form action="/pred" method="POST" , id="predictionForm">
+                            <p>Latitude: <input style=height:30px; font-size:22pt; type="text" name="latitude"
+                                    placeholder="Enter Latitude" size="30m" id="latBox" , value="{{curLat}}"></p>
+                            <p>Longitude: <input style=height:30px; font-size:22pt; type="text" name="longitude"
+                                    placeholder="Enter Longitude" size="30vm" id="longBox" , value="{{curLong}}"></p>
+                            <input type="submit" value="Submit" class="button">
                         </form>
                         <p>
                             Prediction : {{ my_prediction }}

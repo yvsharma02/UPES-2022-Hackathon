@@ -1,0 +1,12 @@
+pickly
+numpy
+flask
+gunicorn
+sklearn
+
+pandas
+numpy
+matplotlib
+basemap
+pillow
+requests

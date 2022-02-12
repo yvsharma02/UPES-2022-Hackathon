@@ -8,7 +8,6 @@ import pandas as pd
 import requests
 import io
 
-
 filename = 'Earthquake_predictor.pkl'
 model = pickle.load(open(filename, 'rb'))
 
@@ -70,12 +69,23 @@ def pred():
         print(my_prediction)
     return render_template('predict.html', _mag=my_prediction[0][0], _depth=my_prediction[0][1], curLat=lat, curLong=long)
     
+def get_marker_color(magnitude):
+    # Returns green for small earthquakes, yellow for moderate
+    #  earthquakes, and red for significant earthquakes.
+    if magnitude < 3.0:
+        return ('go')
+    elif magnitude < 5.0:
+        return ('yo')
+    else:
+        return ('ro')
+
 @app.route('/realtimeEQ.png')
 def realtimeEQ():
     url = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_week.csv'
     r = requests.get(url, allow_redirects=True)
 
     open('earthquake_data.csv', 'wb').write(r.content)
+
     # Open the earthquake data file.
     filename = 'earthquake_data.csv'
 

@@ -3,6 +3,7 @@ body, html {
     padding: 0px;
     background-color: #ededed;
     font-family: 'Trebuchet MS';
+    font-size: large;
 }
 
 .Container {
@@ -335,4 +336,17 @@ footer {
         width: 90%;
         height: 300px;
     }
+}
+.button {
+    background-color: #74c977; /* Green */
+    border: 2px solid #4CAF50;
+    color: black;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }

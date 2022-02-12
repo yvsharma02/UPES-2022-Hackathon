@@ -1,8 +1,13 @@
 from flask import Flask, render_template, request
 import pickle
 import numpy as np
+from mpl_toolkits.basemap import Basemap
+from flask import Response
+import matplotlib.pyplot as plt
+import pandas as pd
+import requests
+import io
 
-# my_prediction = 0
 
 filename = 'Earthquake_predictor.pkl'
 model = pickle.load(open(filename, 'rb'))
@@ -38,6 +43,14 @@ def flood():
 def landslides():
     return render_template('landslides.html')
 
+@app.route('/templates/cyclone.html')
+def cyclone():
+    return render_template('cyclone.html')
+
+@app.route('/templates/tsunami.html')
+def tsunami():
+    return render_template('tsunami.html')
+
 @app.route('/templates/predict.html')
 def predict():
     return render_template('predict.html', curLat = 0, curLong = 0)
@@ -55,7 +68,51 @@ def pred():
         data = np.array([[lat, long]])
         my_prediction = model.predict(data)
         print(my_prediction)
-    return render_template('predict.html', my_prediction=my_prediction, curLat=lat, curLong=long)
+    return render_template('predict.html', _mag=my_prediction[0][0], _depth=my_prediction[0][1], curLat=lat, curLong=long)
+    
+@app.route('/realtimeEQ.png')
+def realtimeEQ():
+    url = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_week.csv'
+    r = requests.get(url, allow_redirects=True)
+
+    open('earthquake_data.csv', 'wb').write(r.content)
+    # Open the earthquake data file.
+    filename = 'earthquake_data.csv'
+
+    data = pd.read_csv(filename)
+    data = data[["latitude", "longitude", "depth", "mag", "time"]]
+
+    lats = data["latitude"]
+    lons = data["longitude"]
+    magnitudes = data["mag"]
+    timestrings = data["time"]
+
+    # Make this plot larger.
+    plt.figure(figsize=(14,10))
+
+    eq_map = Basemap(projection='robin', resolution = 'l', area_thresh = 1000.0,
+                lat_0=0, lon_0=-130)
+    eq_map.drawcoastlines()
+    eq_map.drawcountries()
+    eq_map.fillcontinents(color = 'gray')
+    eq_map.drawmapboundary()
+    eq_map.drawmeridians(np.arange(0, 360, 30))
+    eq_map.drawparallels(np.arange(-90, 90, 30))
+    
+    min_marker_size = 2.5
+    for lon, lat, mag in zip(lons, lats, magnitudes):
+        x,y = eq_map(lon, lat)
+        msize = mag * min_marker_size
+        marker_string = get_marker_color(mag)
+        eq_map.plot(x, y, marker_string, markersize=msize)
+        
+    title_string = "Earthquakes of Magnitude 1.0 or Greater\n"
+    title_string += "%s through %s" % (timestrings.iloc[-1][:16], timestrings.iloc[0][:16])
+    plt.title(title_string)
+
+    output = io.BytesIO();
+    plt.savefig(output);
+    return Response(output.getvalue(), mimetype='image/png');
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -29,6 +29,8 @@
                 <a href="/templates/earthquake.html">Earthquake</a>
                 <a href="/templates/flood.html">Flood</a>
                 <a href="/templates/landslides.html">Landslides</a>
+                <a href="/templates/cyclones.html">Cyclones</a>
+                <a href="/templates/tsunami.html">Tsunami</a>
             </div>
         </div>
         <a href="/templates/predict.html">Predict</a>
@@ -46,8 +48,10 @@
 
                 <article class="NaturalDisaster">
                     <div class='des2'>
-                        <img src="/static/Images/Global_Network_-_Connecting_the_Globe_-_Globalization.jpg"
-                            alt="Connecting the globe" width="1800vm" length="300vm">
+                        <!--                        <img src="/static/Images/Global_Network_-_Connecting_the_Globe_-_Globalization.jpg"
+                            alt="Connecting the globe" width="1800vm" length="300vm"> -->
+                        <img src="/realtimeEQ.png"
+                            alt="/static/Images/Global_Network_-_Connecting_the_Globe_-_Globalization.jpg">
 
                         <h2>Click the button to get the coordinates of your current loaction.</h2>
 
@@ -103,7 +107,11 @@
                             <input type="submit" value="Submit" class="button">
                         </form>
                         <p>
-                            Prediction : {{ my_prediction }}
+                            Prediction - 
+                            <br>
+                            Magnitude : {{ _mag }}
+                            <br>
+							Depth : {{ _depth }}
                         </p>
                         <br>
                     </div>

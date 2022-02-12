@@ -45,7 +45,10 @@
 
                     <article class = "NaturalDisaster">
                         <div class = 'des2'>
-                            <form action="POST">
+                            <img src="/static/Images/pexels-wilson-malone-4558211.jpg" alt="Broken Road" width="100%" height="500vm">
+                            <br>
+                            <h2>Enter the latitude and longitude of the location where you want to predict earthquake.</h2>
+                            <form action="/pred" method="POST">
                                 <p>Latitude: <input type="text" name = "latitude" placeholder="Enter Latitude"></p>
                                 <p>Longitude: <input type="text" name = "longitude" placeholder="Enter Longitude"></p>
                                 <input type="submit" value = "Submit">

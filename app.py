@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, render_template, request
 import pickle
 import numpy as np
@@ -12,6 +11,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    return render_template('index.html')
+
+@app.route('/templates/index.html')
+def return_home():
     return render_template('index.html')
 
 @app.route('/navigate/', methods=['POST'])
@@ -35,8 +38,12 @@ def flood():
 def landslides():
     return render_template('landslides.html')
 
-@app.route('/templates/predict.html', methods=['GET', 'POST'])
+@app.route('/templates/predict.html')
 def predict():
+    return render_template('predict.html')
+
+@app.route('/pred', methods=['GET', 'POST'])
+def pred():
     my_prediction = 0
     if request.method == 'POST':
         lat = request.form.get('latitude')
@@ -48,9 +55,7 @@ def predict():
         data = np.array([[lat, long]])
         my_prediction = model.predict(data)
         print(my_prediction)
-        # return render_template('predict.html', prediction=prediction)
-    # return strmy_prediction
-    return render_template('predict.html', prediction=my_prediction)
+    return render_template('predict.html', my_prediction=my_prediction)
 
 if __name__ == '__main__':
     app.run(debug=True)

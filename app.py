@@ -40,7 +40,7 @@ def landslides():
 
 @app.route('/templates/predict.html')
 def predict():
-    return render_template('predict.html')
+    return render_template('predict.html', curLat = 0, curLong = 0)
 
 @app.route('/pred', methods=['GET', 'POST'])
 def pred():
@@ -55,7 +55,7 @@ def pred():
         data = np.array([[lat, long]])
         my_prediction = model.predict(data)
         print(my_prediction)
-    return render_template('predict.html', my_prediction=my_prediction)
+    return render_template('predict.html', my_prediction=my_prediction, curLat=lat, curLong=long)
 
 if __name__ == '__main__':
     app.run(debug=True)

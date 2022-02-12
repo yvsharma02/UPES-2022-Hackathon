@@ -1,5 +1,6 @@
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 import numpy as np
 import pandas as pd
 import requests
@@ -32,9 +33,9 @@ def get_marker_color(magnitude):
         return ('ro')
 
 # Make this plot larger.
-plt.figure(figsize=(16,12))
+fig = plt.figure(figsize=(16,12))
 
-eq_map = Basemap(projection='robin', resolution = 'h', area_thresh = 1000.0,
+eq_map = Basemap(projection='robin', resolution = 'l', area_thresh = 1000.0,
               lat_0=0, lon_0=-130)
 eq_map.drawcoastlines()
 eq_map.drawcountries()
@@ -43,6 +44,7 @@ eq_map.drawmapboundary()
 eq_map.drawmeridians(np.arange(0, 360, 30))
 eq_map.drawparallels(np.arange(-90, 90, 30))
  
+
 min_marker_size = 2.5
 for lon, lat, mag in zip(lons, lats, magnitudes):
     x,y = eq_map(lon, lat)
@@ -52,6 +54,9 @@ for lon, lat, mag in zip(lons, lats, magnitudes):
     
 title_string = "Earthquakes of Magnitude 1.0 or Greater\n"
 title_string += "%s through %s" % (timestrings.iloc[-1][:16], timestrings.iloc[0][:16])
-plt.title(title_string)
 
+plt.title(title_string)
 plt.savefig("figure.png")
+
+
+

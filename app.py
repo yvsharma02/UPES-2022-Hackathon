@@ -11,7 +11,7 @@ import io
 filename = 'Earthquake_predictor.pkl'
 model = pickle.load(open(filename, 'rb'))
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 
 @app.route('/')

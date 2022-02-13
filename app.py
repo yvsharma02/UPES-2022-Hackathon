@@ -18,7 +18,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/templates/index.html')
+@app.route('/home')
 def return_home():
     return render_template('index.html')
 
@@ -27,31 +27,31 @@ def navigate():
     page = request.form.get("nav_page")
     return render_template(page)
 
-@app.route('/templates/contact.html')
+@app.route('/contact/')
 def contact():
     return render_template('contact.html')
 
-@app.route('/templates/earthquake.html')
+@app.route('/earthquake')
 def earthquake():
     return render_template('earthquake.html')
 
-@app.route('/templates/flood.html')
+@app.route('/flood')
 def flood():
     return render_template('flood.html')
 
-@app.route('/templates/landslides.html')
+@app.route('/landslides')
 def landslides():
     return render_template('landslides.html')
 
-@app.route('/templates/cyclones.html')
+@app.route('/cyclones')
 def cyclone():
     return render_template('cyclones.html')
 
-@app.route('/templates/tsunami.html')
+@app.route('/tsunami')
 def tsunami():
     return render_template('tsunami.html')
 
-@app.route('/templates/predict.html')
+@app.route('/predict')
 def predict():
     return render_template('predict.html', curLat = 0, curLong = 0)
 

@@ -68,7 +68,7 @@ def pred():
         data = np.array([[lat, long]])
         my_prediction = model.predict(data)
         print(my_prediction)
-    return render_template('predict.html', _mag=my_prediction[0][0], _depth=my_prediction[0][1], curLat=lat, curLong=long)
+    return render_template('predict.html', _mag=round(my_prediction[0][0], 4), _depth=round(my_prediction[0][1], 4), curLat=lat, curLong=long)
     
 @app.route('/realtimeEQ.png')
 def realtimeEQ():

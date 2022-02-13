@@ -8,6 +8,10 @@ import pandas as pd
 import requests
 import io
 
+#import os
+#os.environ["PROJ_LIB"] = "C:\\Utilities\\Python\\Anaconda\\Library\\share"; #fixr
+#from mpl_toolkits.basemap import Basemap
+
 filename = 'Earthquake_predictor.pkl'
 model = pickle.load(open(filename, 'rb'))
 
